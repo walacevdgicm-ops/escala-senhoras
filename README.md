@@ -16,7 +16,9 @@ Fiz esse projeto porque a escala era montada à mão todo ano, o que levava temp
 
 ## Como usar
 
-Basta abrir o `index.html` no navegador. Não precisa de servidor.
+Dá para testar direto aqui: **https://walacevdgicm-ops.github.io/escala-senhoras/**
+
+Ou, localmente, basta abrir o `index.html` no navegador. Não precisa de servidor.
 
 O PDF é gerado com [jsPDF](https://github.com/parallax/jsPDF) e jsPDF-AutoTable, carregados por CDN, então é preciso estar com internet na hora de baixar.
 
