@@ -1,0 +1,249 @@
+/* ===== CORES (tema claro) ===== */
+:root {
+  --fundo: #f6f3f3;
+  --cartao: #ffffff;
+  --texto: #2a2224;
+  --suave: #6e6264;
+  --borda: #e6dada;
+  --campo-fundo: #ffffff;
+  --campo-borda: #cbbcbd;
+  --destaque: #b3261e;          /* títulos */
+  --erro: #b3261e;
+  --botao: #b3261e;
+  --botao-hover: #8f1d17;
+  --botao-sec: #e6dada;
+  --botao-sec-texto: #2a2224;
+  --topo-1: #c42b22;            /* faixa vermelha */
+  --topo-2: #8f1d17;
+  --topo-texto: #ffffff;
+  --tabela-borda: #b3261e;
+  --th-fundo: #b3261e;
+  --th-texto: #ffffff;
+  --mes-fundo: #fbeceb;
+  --mes-texto: #b3261e;
+  --logo-dagua: url("img/logo-branco.png");
+  color-scheme: light;
+}
+
+/* ===== CORES (tema escuro) ===== */
+:root[data-tema="escuro"] {
+  --fundo: #141011;
+  --cartao: #1f191a;
+  --texto: #f1e9e9;
+  --suave: #b3a5a6;
+  --borda: #3a2e30;
+  --campo-fundo: #181314;
+  --campo-borda: #4a3b3d;
+  --destaque: #e0b25c;          /* dourado, igual ao logo */
+  --erro: #ff8a80;
+  --botao: #c8382d;
+  --botao-hover: #a82c22;
+  --botao-sec: #342a2b;
+  --botao-sec-texto: #f1e9e9;
+  --topo-1: #5a1411;
+  --topo-2: #2a0908;
+  --topo-texto: #f6e7c8;
+  --tabela-borda: #5a2a28;
+  --th-fundo: #7a1a15;
+  --th-texto: #ffffff;
+  --mes-fundo: #2c1a1a;
+  --mes-texto: #e0b25c;
+  --logo-dagua: url("img/logo-dourado.png");
+  color-scheme: dark;
+}
+
+/* ===== BASE ===== */
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ===== FAIXA VERMELHA COM O LOGO ===== */
+.topo {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--topo-1), var(--topo-2));
+  color: var(--topo-texto);
+  padding: 56px 16px 32px;
+  text-align: center;
+}
+
+/* Timbre: logo grande e bem clarinho ao fundo */
+.marca-dagua {
+  position: absolute;
+  right: -70px;
+  top: 50%;
+  width: 340px;
+  height: 340px;
+  transform: translateY(-50%) rotate(-12deg);
+  background: var(--logo-dagua) center / contain no-repeat;
+  opacity: .09;
+  pointer-events: none;
+}
+
+.topo-conteudo {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, .35));
+}
+.logo-escuro { display: none; }
+:root[data-tema="escuro"] .logo-claro  { display: none; }
+:root[data-tema="escuro"] .logo-escuro { display: block; }
+
+.sobretitulo {
+  margin: 0;
+  font-size: .8rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: .85;
+}
+.topo h1 {
+  margin: 4px 0 0;
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+/* Botões Claro / Escuro */
+.seletor-tema {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: flex;
+  padding: 3px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .25);
+}
+.seletor-tema button {
+  min-height: 32px;
+  padding: 4px 14px;
+  font-size: .85rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--topo-texto);
+}
+.seletor-tema button:hover { background: rgba(255, 255, 255, .12); }
+.seletor-tema button[aria-pressed="true"] {
+  background: var(--topo-texto);
+  color: var(--topo-2);
+  font-weight: 700;
+}
+
+/* ===== CONTEÚDO ===== */
+main { max-width: 800px; margin: 24px auto 40px; padding: 0 16px; }
+
+.cartao {
+  background: var(--cartao);
+  border: 1px solid var(--borda);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+h2 { margin-top: 0; color: var(--destaque); text-wrap: balance; }
+h3 { margin-bottom: 0; }
+
+label { display: block; margin-bottom: 14px; font-weight: 600; }
+
+input, select {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  font-size: 1rem;              /* 16px: evita zoom automático no iPhone */
+  color: var(--texto);
+  background: var(--campo-fundo);
+  border: 1px solid var(--campo-borda);
+  border-radius: 6px;
+}
+input:focus, select:focus, button:focus-visible {
+  outline: 3px solid var(--destaque);
+  outline-offset: 2px;
+}
+#quantidade { width: 120px; font-size: 1.4rem; }
+
+.ajuda { color: var(--suave); font-size: .9rem; }
+.erro  { color: var(--erro); font-weight: 600; }
+.erro:empty { display: none; }
+
+button {
+  min-height: 44px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-family: inherit;
+  border: none;
+  border-radius: 6px;
+  background: var(--botao);
+  color: #fff;
+  cursor: pointer;
+}
+button:hover { background: var(--botao-hover); }
+button.voltar { background: var(--botao-sec); color: var(--botao-sec-texto); }
+
+.acoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+
+.campo-nome small {
+  display: block;
+  margin-top: 4px;
+  color: var(--suave);
+  font-weight: 400;
+}
+
+#resumo { color: var(--suave); }
+
+/* ===== TABELAS ===== */
+.rolagem {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 16px 0;
+}
+
+table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+th, td { border: 1px solid var(--tabela-borda); padding: 6px 8px; text-align: center; }
+th { background: var(--th-fundo); color: var(--th-texto); white-space: nowrap; }
+td.funcao { font-weight: 700; text-align: left; }
+tr.mes td { background: var(--mes-fundo); color: var(--mes-texto); font-weight: 700; text-align: left; }
+tr.aberta td { color: var(--suave); font-style: italic; }
+
+/* ===== CELULAR ===== */
+@media (max-width: 560px) {
+  .topo { padding: 60px 16px 26px; }
+  .logo { width: 92px; height: 92px; }
+  .marca-dagua { width: 240px; height: 240px; right: -60px; }
+
+  main { margin-top: 16px; }
+  .cartao { padding: 18px 16px; }
+  h2 { font-size: 1.25rem; }
+
+  /* Botões um embaixo do outro, o principal em cima */
+  .acoes { flex-direction: column-reverse; }
+  .acoes button { width: 100%; }
+
+  table { font-size: .82rem; }
+  th, td { padding: 5px 4px; }
+  #tabelaEscala .col-rodizio { display: none; }   /* sobra espaço para os nomes */
+}
+
+@media (max-width: 360px) {
+  .logo { width: 80px; height: 80px; }
+  .seletor-tema button { padding: 4px 10px; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button, .seletor-tema button { transition: background-color .15s; }
+}

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#b3261e">
+  <title>Escala de Senhoras</title>
+  <link rel="icon" type="image/png" href="img/logo-dourado.png">
+  <link rel="stylesheet" href="style.css">
+  <!-- Aplica o tema salvo antes de desenhar a página (evita "piscar") -->
+  <script>
+    (function () {
+      var tema = null;
+      try { tema = localStorage.getItem("tema"); } catch (e) {}
+      if (tema !== "claro" && tema !== "escuro") {
+        tema = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "escuro" : "claro";
+      }
+      document.documentElement.dataset.tema = tema;
+    })();
+  </script>
+</head>
+<body>
+  <header class="topo">
+    <!-- Logo em marca d'água (timbre) -->
+    <span class="marca-dagua" aria-hidden="true"></span>
+
+    <div class="seletor-tema" role="group" aria-label="Aparência">
+      <button type="button" data-tema="claro">Claro</button>
+      <button type="button" data-tema="escuro">Escuro</button>
+    </div>
+
+    <div class="topo-conteudo">
+      <img class="logo logo-claro" src="img/logo-branco.png" alt="Logotipo" width="120" height="120">
+      <img class="logo logo-escuro" src="img/logo-dourado.png" alt="Logotipo" width="120" height="120">
+      <div class="topo-texto">
+        <p class="sobretitulo">Trabalho de Senhoras</p>
+        <h1>Escala Anual de Servas</h1>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ETAPA 1: quantidade -->
+    <section id="passo1" class="cartao">
+      <h2>1. Quantas irmãs farão parte do trabalho?</h2>
+      <input type="number" id="quantidade" min="3" max="40" value="4" inputmode="numeric">
+      <p class="ajuda">Mínimo de 3 irmãs (uma para cada função: Palavra, Louvor e Preparo).</p>
+      <p id="erroQtd" class="erro"></p>
+      <div class="acoes">
+        <button id="btnPasso1">Continuar</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 2: nomes -->
+    <section id="passo2" class="cartao" hidden>
+      <h2>2. Nome das irmãs</h2>
+      <div id="listaNomes"></div>
+      <h3>Como fica o rodízio</h3>
+      <div class="rolagem"><table id="tabelaRodizio"></table></div>
+      <p id="erroNomes" class="erro"></p>
+      <div class="acoes">
+        <button class="voltar" data-voltar="passo1">Voltar</button>
+        <button id="btnPasso2">Continuar</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 3: ano e dia -->
+    <section id="passo3" class="cartao" hidden>
+      <h2>3. Ano e dia do encontro</h2>
+      <label>Título da escala
+        <input type="text" id="titulo" value="Escala do Trabalho de Senhoras">
+      </label>
+      <label>Ano
+        <input type="number" id="ano" inputmode="numeric">
+      </label>
+      <label>Dia da semana do encontro
+        <select id="diaSemana">
+          <option value="0">Domingo</option>
+          <option value="1">Segunda-feira</option>
+          <option value="2">Terça-feira</option>
+          <option value="3">Quarta-feira</option>
+          <option value="4">Quinta-feira</option>
+          <option value="5">Sexta-feira</option>
+          <option value="6">Sábado</option>
+        </select>
+      </label>
+      <div class="acoes">
+        <button class="voltar" data-voltar="passo2">Voltar</button>
+        <button id="btnPasso3">Montar escala</button>
+      </div>
+    </section>
+
+    <!-- ETAPA 4: resultado -->
+    <section id="passo4" class="cartao" hidden>
+      <h2>4. Escala pronta</h2>
+      <label>Período para imprimir
+        <select id="periodo">
+          <optgroup label="Anual">
+            <option value="ano">Ano inteiro (jan a dez)</option>
+          </optgroup>
+          <optgroup label="Semestral">
+            <option value="s1">1º semestre (jan a jun)</option>
+            <option value="s2">2º semestre (jul a dez)</option>
+          </optgroup>
+          <optgroup label="Trimestral">
+            <option value="t1">1º trimestre (jan a mar)</option>
+            <option value="t2">2º trimestre (abr a jun)</option>
+            <option value="t3">3º trimestre (jul a set)</option>
+            <option value="t4">4º trimestre (out a dez)</option>
+          </optgroup>
+        </select>
+      </label>
+      <p id="resumo"></p>
+      <div class="acoes">
+        <button class="voltar" data-voltar="passo3">Voltar</button>
+        <button id="btnPDF">Baixar PDF</button>
+      </div>
+      <div class="rolagem"><table id="tabelaEscala"></table></div>
+    </section>
+  </main>
+
+  <!-- Bibliotecas que geram o PDF (precisam de internet) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="img/logo-pdf.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
